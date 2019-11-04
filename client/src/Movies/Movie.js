@@ -10,7 +10,7 @@ const Movie = (props) => {
     // You will NEED to add a dependency array to this effect hook
 
        axios
-        .get(`http://localhost:5000/api/movies/${props.match.params.id}`)
+        .get(`https://ci-react-movies-project.herokuapp.com/api/movies/${props.match.params.id}`)
         .then(response => {
           setMovie(response.data);
         })
