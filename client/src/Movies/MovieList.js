@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Route, Link } from 'react-router-dom';
 import axios from 'axios';
 
 const MovieList = props => {
@@ -14,14 +15,14 @@ const MovieList = props => {
           console.error('Server Error', error);
         });
     }
-    
+
     getMovies();
   }, []);
-  
+
   return (
     <div className="movie-list">
-      {movies.map(movie => (
-        <MovieDetails key={movie.id} movie={movie} />
+      {movies.map(movie => ( <Link to={`/movies/${movie.id}`}>
+        <MovieDetails key={movie.id} movie={movie} /> </Link>
       ))}
     </div>
   );
