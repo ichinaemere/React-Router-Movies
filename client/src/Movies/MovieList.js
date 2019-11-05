@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Route, Link } from 'react-router-dom';
 import axios from 'axios';
 
 const MovieList = props => {
@@ -6,7 +7,7 @@ const MovieList = props => {
   useEffect(() => {
     const getMovies = () => {
       axios
-        .get('http://localhost:5000/api/movies')
+        .get('https://ci-react-movies-project.herokuapp.com/api/movies')
         .then(response => {
           setMovies(response.data);
         })
@@ -14,14 +15,14 @@ const MovieList = props => {
           console.error('Server Error', error);
         });
     }
-    
+
     getMovies();
   }, []);
-  
+
   return (
     <div className="movie-list">
-      {movies.map(movie => (
-        <MovieDetails key={movie.id} movie={movie} />
+      {movies.map(movie => ( <Link to={`/movies/${movie.id}`}>
+        <MovieDetails key={movie.id} movie={movie} /> </Link>
       ))}
     </div>
   );
@@ -30,6 +31,7 @@ const MovieList = props => {
 function MovieDetails({ movie }) {
   const { title, director, metascore, stars } = movie;
   return (
+   <Link to={`/movies/${movie.id}`}>
     <div className="movie-card">
       <h2>{title}</h2>
       <div className="movie-director">
@@ -46,6 +48,7 @@ function MovieDetails({ movie }) {
         </div>
       ))}
     </div>
+   </Link>
   );
 }
 
